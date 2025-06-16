@@ -1,6 +1,5 @@
 - id: pygitguard-scan
   name: PyGitGuard Scan
   entry: pygitguard
-  language: system
-  types: [python]
-  stages: [commit, push]
+  language: python
+  pass_filenames: false
