@@ -32,16 +32,23 @@
 
 It is recommended for use as a **pre-commit hook**, helping prevent critical data from being committed to version control.
 
-> ⚠️ **If any anomaly is detected, the following prompt will appear to confirm override:**
->
-> ```
-> 🛑 Commit blocked due to POSSIBLY sensitive issues detected. Type 'yes' to override and proceed:
-> ```
-
 ---
 
 ## 🚀 How to Use
-
+1. install:
+```
+pip install git+https://github.com/digo5ds/pygitguard.git
+ ```
+2. Configure pre-commit
+- 1. Install Pre-commit (if not already installed)
+```
+pip install pre-commit
+```
+Run
+```
+pre-commit install
+```
+#If you want to run it manually, use:
 1. Navigate to the root directory of your repository.  
 2. Run the command:
 
@@ -55,11 +62,15 @@ pygitguard_cli
 pygitguard_cli --path <your_repository>
 ```
 
-> On first run, a configuration file named `gitguard.yaml` will be automatically generated with default settings.
 
 ---
 
-## ⚙️ Configuration (`.gitguard.yaml`)
+## ⚙️ Configuration
+
+> On first run, a configuration file named `pygitguard.yaml` will be automatically generated with default settings.
+
+
+
 
 This file lets you customize pygitguard's scanning behavior. You can:
 
@@ -67,11 +78,10 @@ This file lets you customize pygitguard's scanning behavior. You can:
 - Specify regex patterns to detect exposed credentials (`SENSITIVE_CONTENT`)
 - List best practice files to be recommended (`BEST_PRACTICES_FILES`)
 - Set a maximum allowed file size (`MAX_FILE_SIZE_MB`)
-
-### Example `gitguard.yaml`
+### Example `pygitguard.yaml`
 
 ```yaml
-# gitguard.yaml: Configuration file for GitGuard.
+# pygitguard.yaml: Configuration file for pygitGuard.
 # Edit this file to adapt the scan to your project's needs.
 # RECOMMENDATION: add {project_path}/__version__.py to BEST_PRACTICES_FILES
 
@@ -124,7 +134,20 @@ BEST_PRACTICES_FILES:
 
 MAX_FILE_SIZE_MB: 1
 ```
+>If you are already using a `.pre-commit-config.yaml` file, simply add the following to your `repos` section:
 
+```yaml
+repos:
+  - repo: https://github.com/digo5ds/pygitguard
+    rev: 1.0.1  # Use the latest tag or release
+    hooks:
+      - id: pygitguard-scan
+        name: PyGitGuard Scan
+        entry: pygitguard
+        language: system
+        types: [python]
+        stages: [pre-commit]
+```
 ---
 
 ## 💡 Customization Tips
