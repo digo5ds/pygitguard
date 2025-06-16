@@ -53,23 +53,29 @@ pre-commit install
 2. Run the command:
 
 ```
-pygitguard_cli
+pygitguard
 ```
 
-3. To scan a specific directory, but is recomended navigate to the root directory of your repository and run pygitguard_cli:
+3. To scan a specific directory, but is recomended navigate to the root directory on your repository.
 
 ```
-pygitguard_cli --path <your_repository>
+pygitguard --path <your_repository>
 ```
 
+> With pre-commit configured, the scan will run automatically before every commit.  
+<p align="center">
+  <img src="docs/report.png" alt="AWS Services" width="600"/>
+</p>
+If you want to skip the scan for a specific commit, use:
 
+```
+git commit -m "your message" --no-verify 
+```
 ---
 
 ## ⚙️ Configuration
 
 > On first run, a configuration file named `pygitguard.yaml` will be automatically generated with default settings.
-
-
 
 
 This file lets you customize pygitguard's scanning behavior. You can:
