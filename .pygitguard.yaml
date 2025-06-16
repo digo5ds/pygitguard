@@ -53,3 +53,4 @@ INTERNAL_FILE_IGNORE:
 - .gitignore
 - pygitguard_constants.py
 - ./docs/pygitguard.png
+- ./docs/report.png
