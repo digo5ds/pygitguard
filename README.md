@@ -14,6 +14,9 @@
 
 ## 📦 Version
 
+**1.0.1** – First version with the basic planned functions.
+  - Fix: Installer package with pip.
+
 **1.0.0** – First version with the basic planned functions.
 
 ### Included features:
