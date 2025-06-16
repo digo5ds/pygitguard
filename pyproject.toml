@@ -1,15 +1,12 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "pygitguard"
-version = "1.0.0"
-description = "Sensitive file scanner before commit"
-authors = [{ github = "https://github.com/digo5ds" }]
-readme = "README.md"
-requires-python = ">=3.7"
-dependencies = []
+version = "0.1.0"
+authors = [
+  { name = "Diogo Ferreira da Silva", email = "diogo@example.com" }
+]
+description = "Uma ferramenta para proteger repositórios Git usando IA local."
 
-[project.scripts]
-pygitguard = "pygitguard_cli:main"
+[project.urls]
+"Homepage" = "https://github.com/digo5ds"
+"Repository" = "https://github.com/digo5ds/pygitguard"
+"LinkedIn" = "https://www.linkedin.com/in/diogosilvaf/"
