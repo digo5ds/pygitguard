@@ -267,7 +267,10 @@ class PyGitGuardScan:
                     continue
 
                 self.check_sensitive_filenames(
-                    filename, rel_path, sensitive_patterns, internal_file_ignore
+                    filename,
+                    rel_path,
+                    sensitive_patterns,
+                    internal_file_ignore,
                 )
                 self.check_large_file(
                     full_path, rel_path, max_size_mb, internal_file_ignore

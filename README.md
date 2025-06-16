@@ -14,6 +14,9 @@
 
 ## 📦 Version History
 
+**1.0.2**
+  - Refactor: Standarize a bit lines with black linter.
+  
 **1.0.1** 
   - Fix: pip install support.
   - Fix: pre-commit support.
@@ -21,6 +24,7 @@
   - Fix: Add pre-commit to requirements.txt.
   - Fix: Creating config files if they do not exist.
   - Fix: Remove interactive mode with input (not supported with pre-commit).
+
 **1.0.0** – Initial release with core features
 
 ### ✅ Features
