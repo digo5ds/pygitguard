@@ -1,12 +1,15 @@
 [project]
 name = "pygitguard"
-version = "0.1.0"
+version = "1.0.0"
 authors = [
-  { name = "Diogo Ferreira da Silva", email = "diogo@example.com" }
+  { name = "Diogo Ferreira da Silva"}
 ]
-description = "Uma ferramenta para proteger repositórios Git usando IA local."
+description = "A tool to prevent you from pushing sensitive files to your repository."
 
 [project.urls]
-"Homepage" = "https://github.com/digo5ds"
-"Repository" = "https://github.com/digo5ds/pygitguard"
-"LinkedIn" = "https://www.linkedin.com/in/diogosilvaf/"
+Homepage = "https://github.com/digo5ds"
+Repository = "https://github.com/digo5ds/pygitguard"
+LinkedIn = "https://www.linkedin.com/in/diogosilvaf/"
+
+[project.scripts]
+pygitguard = "pygitguard.cli:main"
