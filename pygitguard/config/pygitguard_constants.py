@@ -1,7 +1,9 @@
 import yaml
 
+PYGITGUARD_FILENAME = ".pygitguard.yaml"
+
 INTERNAL_FILE_IGNORE = [
-    ".gitguard.yaml",
+    PYGITGUARD_FILENAME,
     "requirements.txt",
     ".gitignore",
     "pygitguard_constants.py",

@@ -8,6 +8,7 @@ from pygitguard.config.pygitguard_constants import (
     BEST_PRACTICES_FILES,
     INTERNAL_FILE_IGNORE,
     MAX_FILE_SIZE_MB,
+    PYGITGUARD_FILENAME,
     SENSITIVE_CONTENT,
     SENSITIVE_PATTERNS,
 )
@@ -96,7 +97,7 @@ class PyGitGuardScan:
             A tuple containing the maximum file size in megabytes,
             sensitive content regex patterns, and sensitive file patterns.
         """
-        config_path = os.path.join(base_path, ".gitguard.yaml")
+        config_path = os.path.join(base_path, PYGITGUARD_FILENAME)
         if not os.path.isfile(config_path):
             return (
                 MAX_FILE_SIZE_MB,

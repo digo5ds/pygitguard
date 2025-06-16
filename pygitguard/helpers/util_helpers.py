@@ -7,12 +7,13 @@ from pygitguard.config.pygitguard_constants import (
     BEST_PRACTICES_FILES,
     INTERNAL_FILE_IGNORE,
     MAX_FILE_SIZE_MB,
+    PYGITGUARD_FILENAME,
     SENSITIVE_CONTENT,
     SENSITIVE_PATTERNS,
 )
 
 
-def export_config_to_yaml(filepath=".gitguard.yaml"):
+def export_config_to_yaml(filepath=PYGITGUARD_FILENAME):
     """
     Export the current config constants to a YAML file.
     Adds a comment at the top explaining the purpose of the file.
