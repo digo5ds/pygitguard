@@ -1,5 +1,5 @@
 - id: pygitguard-scan
   name: PyGitGuard Scan
   entry: pygitguard
-  language: python
+  language: system
   pass_filenames: false
