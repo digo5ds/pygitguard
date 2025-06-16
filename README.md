@@ -1,132 +1,119 @@
 <p align="center">
-  <img src="docs/pygitguard.png" alt="AWS Services" width="200"/>
+  <img src="docs/pygitguard.png" alt="PyGitGuard Logo" width="200"/>
 </p>
 
-## 🛡️ Pygitguard
+# 🛡️ PyGitGuard
 
-**pygitguard** is a Git project security scanner that detects:
+**PyGitGuard** is a Git security scanner designed to prevent accidental commits of sensitive data by scanning for:
 
-- Exposed credentials  
-- Potentially sensitive files  
-- Missing best practice files  
-
----
-
-## 📦 Version
-
-**1.0.1** – First version with the basic planned functions.
-  - Fix: Installer package with pip.
-
-**1.0.0** – First version with the basic planned functions.
-
-### Included features:
-
-- 🚫 Detection of sensitive content using regex (e.g., passwords, tokens, API keys).
-- 🧾 Identification of sensitive file patterns (e.g., `.env`, `.pem`, `id_rsa`).
-- ⚠️ File size validation with configurable maximum size.
-- 📄 Best practice file recommendations (e.g., `README.md`, `.gitignore`, `LICENSE`).
-- ✅ Integration support with pre-commit hooks.
-- ⚙️ Auto-generation of `pygitguard.yaml` and .pre-commit-config.yaml configuration file on first run.
+* 🧪 Exposed credentials
+* 📁 Potentially sensitive files
+* 📄 Missing best practice files
 
 ---
 
-It is recommended for use as a **pre-commit hook**, helping prevent critical data from being committed to version control.
+## 📦 Version History
+
+**1.0.1** – Fix: pip install support
+**1.0.0** – Initial release with core features
+
+### ✅ Features
+
+* 🚫 Detect sensitive content via regex (e.g., passwords, tokens, API keys)
+* 🔍 Scan for sensitive filenames like `.env`, `.pem`, `id_rsa`
+* 📏 Enforce maximum file size policies
+* 📚 Recommend best practice files (e.g., `README.md`, `.gitignore`, `LICENSE`)
+* 🔄 Auto-generate configuration files
+* 🪝 Pre-commit hook support
 
 ---
 
-## 🚀 How to Use
-1. install:
-```
+## 🚀 Quick Start Guide
+
+### 1. Install PyGitGuard
+
+```bash
 pip install git+https://github.com/digo5ds/pygitguard.git
- ```
-2. Configure pre-commit
-- 1. Install Pre-commit (if not already installed)
 ```
+
+### 2. Install and Configure `pre-commit`
+
+If you haven't already:
+
+```bash
 pip install pre-commit
-```
-Run
-```
 pre-commit install
 ```
-#If you want to run it manually, use:
-1. Navigate to the root directory of your repository.  
-2. Run the command:
 
-```
+To manually run a scan:
+
+```bash
 pygitguard
 ```
 
-3. To scan a specific directory, but is recomended navigate to the root directory on your repository.
+To scan a specific path:
 
-```
+```bash
 pygitguard --path <your_repository>
 ```
 
-> With pre-commit configured, the scan will run automatically before every commit.  
-<p align="center">
-  <img src="docs/report.png" alt="AWS Services" width="600"/>
-</p>
-If you want to skip the scan for a specific commit, use:
+> With pre-commit configured, the scan runs automatically before each commit.
 
+<p align="center">
+  <img src="docs/report.png" alt="Scan Report Example" width="600"/>
+</p>
+
+To bypass a scan for a commit:
+
+```bash
+git commit -m "your message" --no-verify
 ```
-git commit -m "your message" --no-verify 
-```
+
 ---
 
 ## ⚙️ Configuration
 
-> On first run, a configuration file named `pygitguard.yaml` will be automatically generated with default settings.
+On the first run, `.pygitguard.yaml` and `.pre-commit-config.yaml` is created (if not exists). This file allows customization of scan behavior.
+## 📌 Using with `.pre-commit-config.yaml`
 
-
-This file lets you customize pygitguard's scanning behavior. You can:
-
-- Define sensitive file patterns (`SENSITIVE_PATTERNS`)
-- Specify regex patterns to detect exposed credentials (`SENSITIVE_CONTENT`)
-- List best practice files to be recommended (`BEST_PRACTICES_FILES`)
-- Set a maximum allowed file size (`MAX_FILE_SIZE_MB`)
-### Example `pygitguard.yaml`
+If you're already using pre-commit, add this to your config:
 
 ```yaml
-# pygitguard.yaml: Configuration file for pygitGuard.
-# Edit this file to adapt the scan to your project's needs.
-# RECOMMENDATION: add {project_path}/__version__.py to BEST_PRACTICES_FILES
+repos:
+  - repo: https://github.com/digo5ds/pygitguard
+    rev: 1.0.1  # Replace with the latest release
+    hooks:
+      - id: pygitguard-scan
+        name: PyGitGuard Scan
+        entry: pygitguard
+        language: system
+        types: [python]
+        stages: [pre-commit]
+```
 
+### Example `.pygitguard.yaml`
+
+```yaml
 SENSITIVE_PATTERNS:
-  - .*\.env(\..*)?$
-  - .*\.pem(\..*)?$
-  - .*\.key(\..*)?$
-  - .*\.crt(\..*)?$
-  - .*\.sqlite(\..*)?$
-  - .*\.db(\..*)?$
-  - .*secret[s]?(\..*)?$
-  - .*credential[s]?(\..*)?$
-  - .*private\.key(\..*)?$
-  - .*id_rsa(\..*)?$
-  - .*id_dsa(\..*)?$
-  - .*credentials(\..*)?$
-  - .*passwords?(\..*)?$
-  - .*apikeys?(\..*)?$
-  - .*api_keys?(\..*)?$
-  - .*tokens?(\..*)?$
-  - .*usernames?(\..*)?$
-  - .*users?(\..*)?$
-  - .*ACCESS_KEYs?(\..*)?$
+  - .*\.env.*$
+  - .*\.pem.*$
+  - .*\.key.*$
+  - .*\.crt.*$
+  - .*\.sqlite.*$
+  - .*\.db.*$
+  - .*secret.*$
+  - .*credential.*$
+  - .*id_rsa.*$
+  - .*password.*$
+  - .*token.*$
+  - .*ACCESS_KEY.*$
 
 SENSITIVE_CONTENT:
-  - \b\w*password\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*passwords\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*apikey\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*apikeys\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*api_key\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*api_keys\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*token\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*tokens\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*username\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*usernames\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*user\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*users\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*ACCESS_KEY\w*\s*=\s*['\`"].+['\`"]
-  - \b\w*ACCESS_KEYS\w*\s*=\s*['\`"].+['\`"]
+  - \b\w*password\w*\s*=\s*['"`].+['"`]
+  - \b\w*token\w*\s*=\s*['"`].+['"`]
+  - \b\w*api[_-]?key\w*\s*=\s*['"`].+['"`]
+  - \b\w*user(name)?\w*\s*=\s*['"`].+['"`]
+  - \b\w*ACCESS_KEY\w*\s*=\s*['"`].+['"`]
 
 BEST_PRACTICES_FILES:
   - .gitignore
@@ -140,35 +127,22 @@ BEST_PRACTICES_FILES:
 
 MAX_FILE_SIZE_MB: 1
 ```
->If you are already using a `.pre-commit-config.yaml` file, simply add the following to your `repos` section:
-
-```yaml
-repos:
-  - repo: https://github.com/digo5ds/pygitguard
-    rev: 1.0.1  # Use the latest tag or release
-    hooks:
-      - id: pygitguard-scan
-        name: PyGitGuard Scan
-        entry: pygitguard
-        language: system
-        types: [python]
-        stages: [pre-commit]
-```
----
-
-## 💡 Customization Tips
-
-We recommend adding your project’s `<your_project>/__version__.py` file to the `BEST_PRACTICES_FILES` list to track your package version properly.
 
 ---
 
-## 🔧 Integration with pre-commit
+## 💡 Tips
 
-To use pygitguard as a local hook with [pre-commit](https://pre-commit.com):
+* Add `__version__.py` to `BEST_PRACTICES_FILES` to track versioning.
+* Customize `MAX_FILE_SIZE_MB` for your project's sensitivity.
+
+---
+
+## 🔧 Local Hook Example
+
+To use as a local hook:
 
 ```yaml
-# .pre-commit-config.yaml
-- repo: <your_repo>
+- repo: local
   hooks:
     - id: pygitguard
       name: pygitguard
@@ -181,13 +155,14 @@ To use pygitguard as a local hook with [pre-commit](https://pre-commit.com):
 
 ## 📄 License
 
-Distributed under the MIT License.
+MIT License
 
 ---
 
 ## 🤝 Contributing
 
-Pull requests are welcome! Feel free to open issues or submit PRs for enhancements, fixes, or additional patterns.
+Pull requests and issue reports are welcome!
 
 ### 📬 Contact
-[LinkedIn profile](https://www.linkedin.com/in/diogosilvaf/).
+
+[LinkedIn](https://www.linkedin.com/in/diogosilvaf/)
