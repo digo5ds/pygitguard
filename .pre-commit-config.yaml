@@ -1,0 +1,8 @@
+repos:
+  - repo: gitguard
+    hooks:
+      - id: pygitguard-scan
+        name: PyGitGuard Scan
+        entry: pygitguard_cli
+        language: system
+        stages: [pre-commit]

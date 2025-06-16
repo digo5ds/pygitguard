@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygitguard"
+version = "1.0.0"
+description = "Sensitive file scanner before commit"
+authors = [{ github = "https://github.com/digo5ds" }]
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = []
+
+[project.scripts]
+pygitguard = "pygitguard_cli:main"
