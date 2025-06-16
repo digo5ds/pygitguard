@@ -1,8 +1,10 @@
 repos:
-  - repo: gitguard
+  - repo: https://github.com/digo5ds/pygitguard
+    rev: 1.0.1
     hooks:
       - id: pygitguard-scan
         name: PyGitGuard Scan
-        entry: pygitguard_cli
+        entry: pygitguard
         language: system
+        types: [python]
         stages: [pre-commit]

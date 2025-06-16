@@ -1,0 +1,55 @@
+# .gitguard.yaml: Configuration file for GitGuard.
+# This file customizes sensitive file patterns, content patterns, ignored paths, and other scan settings.
+# Edit this file to adapt GitGuard's scan to your project's needs.
+# RECOMENDATION: set {project_path}/__version__.py  in BEST_PRACTICES_FILES
+
+SENSITIVE_PATTERNS:
+- .*\.env(\..*)?$
+- .*\.pem(\..*)?$
+- .*\.key(\..*)?$
+- .*\.crt(\..*)?$
+- .*\.sqlite(\..*)?$
+- .*\.db(\..*)?$
+- .*secret[s]?(\..*)?$
+- .*credential[s]?(\..*)?$
+- .*private\.key(\..*)?$
+- .*id_rsa(\..*)?$
+- .*id_dsa(\..*)?$
+- .*credentials(\..*)?$
+- .*passwords?(\..*)?$
+- .*apikeys?(\..*)?$
+- .*api_keys?(\..*)?$
+- .*tokens?(\..*)?$
+- .*usernames?(\..*)?$
+- .*users?(\..*)?$
+- .*ACCESS_KEYs?(\..*)?$
+SENSITIVE_CONTENT:
+- \b\w*password\w*\s*=\s*['\"`].+['\"`]
+- \b\w*passwords\w*\s*=\s*['\"`].+['\"`]
+- \b\w*apikey\w*\s*=\s*['\"`].+['\"`]
+- \b\w*apikeys\w*\s*=\s*['\"`].+['\"`]
+- \b\w*api_key\w*\s*=\s*['\"`].+['\"`]
+- \b\w*api_keys\w*\s*=\s*['\"`].+['\"`]
+- \b\w*token\w*\s*=\s*['\"`].+['\"`]
+- \b\w*tokens\w*\s*=\s*['\"`].+['\"`]
+- \b\w*username\w*\s*=\s*['\"`].+['\"`]
+- \b\w*usernames\w*\s*=\s*['\"`].+['\"`]
+- \b\w*user\w*\s*=\s*['\"`].+['\"`]
+- \b\w*users\w*\s*=\s*['\"`].+['\"`]
+- \b\w*ACCESS_KEY\w*\s*=\s*['\"`].+['\"`]
+- \b\w*ACCESS_KEYS\w*\s*=\s*['\"`].+['\"`]
+BEST_PRACTICES_FILES:
+- .gitignore
+- Dockerfile: .dockerignore
+- docker-compose.yml: .dockerignore
+- README.md
+- LICENSE
+- requirements.txt
+- pyproject.toml
+MAX_FILE_SIZE_MB: 1
+INTERNAL_FILE_IGNORE:
+- .pygitguard.yaml
+- requirements.txt
+- .gitignore
+- pygitguard_constants.py
+- ./docs/pygitguard.png

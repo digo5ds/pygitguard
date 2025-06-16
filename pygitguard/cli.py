@@ -36,15 +36,10 @@ def main():
 
     scanner = PyGitGuardScan(logger)
     if scanner.scan_repository(args.path):
-        response = input(
-            "🛑 Commit blocked due to POSSIBLY sensitive issues detected. Type 'yes' to override and proceed: "
-        ).lower()
+        sys.exit(1)
 
-        if response.lower() == "no":
-            logger.warning("Commit aborted due to sensitive issues.")
-            sys.exit(1)
-    logger.info("Commit approved.")  # Allow the commit even with warnings
-    sys.exit(0)
+
+# Allow the commit even with warnings
 
 
 if __name__ == "__main__":

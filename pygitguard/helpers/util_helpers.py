@@ -2,6 +2,7 @@ import os
 
 import yaml
 
+from pygitguard.__version__ import get_version
 from pygitguard.config.logger import logger
 from pygitguard.config.pygitguard_constants import (
     BEST_PRACTICES_FILES,
@@ -60,13 +61,16 @@ def create_pre_commit_config(path=".pre-commit-config.yaml"):
         project_name = os.path.basename(os.getcwd())  # pega o nome da pasta atual
         content = f"""
     repos:
-    - repo: {project_name}
-        hooks:
-        - id: pygitguard-scan
-            name: PyGitGuard Scan
-            entry: pygitguard_cli
-            language: system
-            stages: [pre-commit]
+  - repo: https://github.com/digo5ds/pygitguard
+    rev:{get_version} 
+    hooks:
+      - id: pygitguard-scan
+        name: PyGitGuard Scan
+        entry: pygitguard
+        language: system
+        types: [python]
+        stages: [pre-commit]
+
     """
         with open(path, "w", encoding="utf-8") as f:
             f.write(content.strip() + "\n")
