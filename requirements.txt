@@ -1,3 +1,4 @@
 pyyaml
 pathspec
 rich
+pre-commit
