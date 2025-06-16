@@ -14,7 +14,13 @@
 
 ## 📦 Version History
 
-**1.0.1** – Fix: pip install support
+**1.0.1** 
+  - Fix: pip install support.
+  - Fix: pre-commit support.
+  - Fix: Improvements to config in .pre-commit-config.yaml.
+  - Fix: Add pre-commit to requirements.txt.
+  - Fix: Creating config files if they do not exist.
+  - Fix: Remove interactive mode with input (not supported with pre-commit).
 **1.0.0** – Initial release with core features
 
 ### ✅ Features
