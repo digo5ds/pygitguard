@@ -1,3 +1,5 @@
+"""A module to scan a Git repository for security and best practice issues."""
+
 import os
 import re
 from logging import Logger
@@ -140,13 +142,13 @@ class PyGitGuardScan:
                 target = self.__get_value_case_insensitive(item, src)
                 if src in files_in_dir and target.lower() not in files_in_dir:
                     self.logger.info(
-                        f"RECOMENDED: you are using '{src}' → consider adding best practice file '{target}'"
+                        f"RECOMENDED: you are using '{src}' → consider"
+                        f"adding best practice file '{target}'"
                     )
-                    self.block_commit = True
             else:
                 if item.lower() not in files_in_dir:
                     self.logger.info(f"RECOMENDED: create best practice file '{item}'")
-                    self.block_commit = True
+                    self.block_commit = False
 
     def check_sensitive_filenames(
         self, filename, rel_path, patterns, internal_file_ignore
@@ -175,7 +177,7 @@ class PyGitGuardScan:
                 re.search(pattern, filename, re.IGNORECASE)
                 and filename not in internal_file_ignore
             ):
-                self.logger.warning(f"POSSIBLY: sensitive file name: '{rel_path}'")
+                self.logger.warning(f"WARNING: sensitive file name: '{rel_path}'")
                 self.block_commit = True  # ← bloqueia commit
 
     def check_large_file(self, full_path, rel_path, max_size_mb, internal_file_ignore):

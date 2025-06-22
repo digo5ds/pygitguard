@@ -1,3 +1,5 @@
+"""Utility functions for PyGitGuard configuration and setup."""
+
 import os
 
 import yaml
@@ -29,7 +31,8 @@ def export_config_to_yaml(filepath=PYGITGUARD_FILENAME):
         }
         comment = (
             "# .gitguard.yaml: Configuration file for GitGuard.\n"
-            "# This file customizes sensitive file patterns, content patterns, ignored paths, and other scan settings.\n"
+            "# This file customizes sensitive file patterns, content patterns"
+            ", ignored paths, and other scan settings.\n"
             "# Edit this file to adapt GitGuard's scan to your project's needs.\n"
             "# RECOMENDATION: set {project_path}/__version__.py  in BEST_PRACTICES_FILES\n\n"
         )
@@ -58,11 +61,10 @@ def create_pre_commit_config(path=".pre-commit-config.yaml"):
         Defaults to ".pre-commit-config.yaml".
     """
     if not os.path.exists(path):
-        project_name = os.path.basename(os.getcwd())  # pega o nome da pasta atual
         content = f"""
     repos:
   - repo: https://github.com/digo5ds/pygitguard
-    rev:{get_version} 
+    rev:{get_version}
     hooks:
       - id: pygitguard-scan
         name: PyGitGuard Scan
