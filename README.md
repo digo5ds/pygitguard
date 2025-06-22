@@ -13,6 +13,10 @@
 ---
 
 ## 📦 Version History
+**1.0.3**
+ - Fix: "Do not block commits in cases of recommendations."
+ - Adding context message after run
+
 
 **1.0.2**
   - Refactor: Standarize a bit lines with black linter.
