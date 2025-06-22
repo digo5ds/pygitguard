@@ -1,4 +1,4 @@
-import yaml
+"""pygitguard default patterns and settings."""
 
 PYGITGUARD_FILENAME = ".pygitguard.yaml"
 

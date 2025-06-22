@@ -1,3 +1,4 @@
+# git helper functions
 import os
 
 import pathspec

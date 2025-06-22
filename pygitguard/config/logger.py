@@ -1,6 +1,8 @@
+"Custom logging formatter for PYGITGUARD"
+
 import logging
 
-# Códigos ANSI para cores por nível
+# Colors ANSI
 COLOR_CODES = {
     "DEBUG": "\033[36m",  # cyan
     "INFO": "\033[1;32m",  # bold green
@@ -10,7 +12,7 @@ COLOR_CODES = {
 }
 RESET_CODE = "\033[0m"
 
-# Ícones por nível
+# Icons for log levels
 ICONS = {
     "DEBUG": "🐛",
     "INFO": "ℹ️",
@@ -21,8 +23,45 @@ ICONS = {
 
 
 class IconOnlyColorFormatter(logging.Formatter):
+    """ "
+    A custom logging formatter that replaces the log level name
+    with an icon and applies ANSI color codes to the entire log message.
+
+    This formatter modifies the log record to display an icon corresponding
+    to the log level instead of the textual level name.
+    It also colors the entire log message line based on the log level
+    using ANSI escape codes.
+
+    Attributes
+    None
+
+    Methods
+    format(record)
+        Formats the specified log record, replacing the level name
+        with an icon and coloring the message line.
+    """
+
     def format(self, record):
-        # Substitui completamente o levelname por um ícone
+        """
+        Formats a logging record by replacing the level name
+        with an icon and applying ANSI color codes.
+
+        The method modifies the log record to display
+        an icon corresponding to the log level instead
+        of the level name. It also applies an ANSI color
+        to the entire message line based on the log level.
+
+        Parameters
+        ----------
+        record : logging.LogRecord
+            The log record to be formatted.
+
+        Returns
+        -------
+        str
+            The formatted log message with an icon and color.
+        """
+
         level = record.levelname
         record.levelname = ICONS.get(level, "")
 
@@ -34,16 +73,15 @@ class IconOnlyColorFormatter(logging.Formatter):
         return f"{color}{msg}{RESET_CODE}"
 
 
-# Configuração básica do logging
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s | %(levelname)s  %(name)s -> %(message)s",
     handlers=[logging.StreamHandler()],
 )
 
-# Substitui o formatter padrão pelo personalizado
 handler = logging.getLogger().handlers[0]
 handler.setFormatter(IconOnlyColorFormatter(handler.formatter._fmt))
 
 # Logger de exemplo
 logger = logging.getLogger("PYGITGUARD")
+logger.setLevel(logging.INFO)
