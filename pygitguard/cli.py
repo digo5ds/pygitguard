@@ -37,8 +37,8 @@ def main():
     scanner = PyGitGuardScan(logger)
     if scanner.scan_repository(args.path):
         logger.info(
-            "Your commit are locked by PYGitGuard, you can ignore"
-            "it with 'git commit -m [your message] --no-verify'"
+            "Your commit are locked by PYGitGuard, you can ignore it"
+            "with 'git commit -m [your message] --no-verify'"
         )
         sys.exit(1)
 
