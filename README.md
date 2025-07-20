@@ -46,7 +46,10 @@
 ## 🚀 Quick Start Guide
 
 ### 1. Install PyGitGuard
-
+```bash
+pip install pygitguard==1.0.4
+```
+or
 ```bash
 pip install git+https://github.com/digo5ds/pygitguard.git
 ```
